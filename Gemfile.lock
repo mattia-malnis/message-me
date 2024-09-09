@@ -123,6 +123,9 @@ GEM
     ffaker (2.23.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
+    google-protobuf (4.28.0-arm64-darwin)
+      bigdecimal
+      rake (>= 13)
     i18n (1.14.5)
       concurrent-ruby (~> 1.0)
     importmap-rails (2.0.1)
@@ -176,11 +179,14 @@ GEM
       ast (~> 2.4.1)
       racc
     pg (1.5.8)
+    pg_query (5.1.0)
+      google-protobuf (>= 3.22.3)
     propshaft (0.9.1)
       actionpack (>= 7.0.0)
       activesupport (>= 7.0.0)
       rack
       railties (>= 7.0.0)
+    prosopite (1.4.2)
     psych (5.1.2)
       stringio
     public_suffix (6.0.1)
@@ -354,7 +360,9 @@ DEPENDENCIES
   ffaker (~> 2.23)
   importmap-rails
   pg (~> 1.1)
+  pg_query (~> 5.1)
   propshaft
+  prosopite (~> 1.4, >= 1.4.2)
   puma (>= 5.0)
   rails (~> 7.2.1)
   rails-controller-testing (~> 1.0)

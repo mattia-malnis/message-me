@@ -61,6 +61,12 @@ group :development, :test do
 
   # A library for setting up Ruby objects as test data [https://github.com/thoughtbot/factory_bot_rails]
   gem "factory_bot_rails", "~> 6.4"
+
+  # Rails N+1 queries auto-detection [https://github.com/charkost/prosopite]
+  gem "prosopite", "~> 1.4", ">= 1.4.2"
+
+  # Ruby extension to parse, deparse and normalize SQL queries using the PostgreSQL query parser [https://github.com/pganalyze/pg_query]
+  gem "pg_query", "~> 5.1"
 end
 
 group :development do

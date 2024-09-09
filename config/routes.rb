@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get "pages/index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -15,5 +14,7 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  get "placeholder", to: "pages#temp_page"
+  get "profile", to: "profiles#show", as: "profile"
+  get "profile/edit", to: "profiles#edit", as: "edit_profile"
+  put "profile", to: "profiles#update"
 end

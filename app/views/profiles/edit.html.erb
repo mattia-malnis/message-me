@@ -1,0 +1,26 @@
+<section class="mx-auto w-full max-w-md bg-white rounded shadow p-8">
+  <h2 class="text-lg font-semibold text-gray-900">Update your profile</h2>
+
+  <%= form_with(model: @profile, url: profile_path, method: :put, builder: StyledFormBuilder, html: { class: "mt-6 grid grid-cols-1 gap-y-6" }) do |f| %>
+    <%= alert_error(flash[:alert] || @profile.errors.full_messages) %>
+
+    <div>
+      <%= f.label :name %>
+      <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+    </div>
+
+    <div>
+      <%= f.label :nickname %>
+      <%= f.text_field :nickname, autocomplete: "nickname" %>
+    </div>
+
+    <div>
+      <%= f.label :bio %>
+      <%= f.text_area :bio %>
+    </div>
+
+    <div>
+      <%= f.submit "Update profile" %>
+    </div>
+  <% end %>
+</section>

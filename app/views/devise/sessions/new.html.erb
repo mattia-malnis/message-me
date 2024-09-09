@@ -1,0 +1,21 @@
+<section class="mx-auto w-full max-w-md bg-white rounded shadow p-8">
+  <h2 class="text-lg font-semibold text-gray-900">Sign in to your account</h2>
+  <p class="mt-2 text-sm text-gray-700">Don’t have an account? <%= link_to "Sign up", new_user_registration_path, class: "font-medium text-blue-600 hover:underline" %></p>
+
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name), builder: StyledFormBuilder, html: { class: "mt-6 grid grid-cols-1 gap-y-6" }) do |f| %>
+    <%= alert_error(flash[:alert]) %>
+    <div>
+      <%= f.label :email %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    </div>
+
+    <div>
+      <%= f.label :password %>
+      <%= f.password_field :password, autocomplete: "current-password" %>
+    </div>
+
+    <div>
+      <%= f.submit "Sign in" %>
+    </div>
+  <% end %>
+</section>

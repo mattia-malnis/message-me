@@ -6,6 +6,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <%= turbo_refreshes_with method: :morph, scroll: :preserve %>
 
     <%= yield :head %>
 
@@ -31,7 +32,7 @@
         <% end %>
       </div>
     </header>
-    <%= content_tag :main, class: [{"flex flex-grow": content_for?(:sidebar)}] do %>
+    <%= content_tag :main, class: [{"flex-1 flex": content_for?(:sidebar)}] do %>
       <%= yield :sidebar %>
       <%= yield %>
     <% end %>

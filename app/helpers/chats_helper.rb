@@ -11,7 +11,7 @@ module ChatsHelper
     return if message.blank?
 
     class_names = its_me ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-800"
-    content_tag :div, class: ["p-3 rounded-lg", class_names] do
+    content_tag :div, class: ["rounded-3xl px-5 py-2.5 sm:max-w-lg", class_names] do
       content_tag :p, message.content, class: "text-sm"
     end
   end

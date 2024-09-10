@@ -1,0 +1,2 @@
+<%= turbo_stream.append("messages", partial: "message", locals: { message: @message }) if @message.errors.empty? %>
+<%= turbo_stream.replace("message-input", partial: "message_input", locals: { with_error: @message.errors.any? }) %>

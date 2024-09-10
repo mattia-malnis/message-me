@@ -18,5 +18,5 @@ Rails.application.routes.draw do
   get "profile/edit", to: "profiles#edit", as: "edit_profile"
   put "profile", to: "profiles#update"
 
-  resources :chats, only: [:index, :show], param: :token
+  resources :chats, only: [:index, :show, :update], param: :token
 end

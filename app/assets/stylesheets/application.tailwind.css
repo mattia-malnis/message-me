@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 #chat_details {
-  @apply w-3/4 flex flex-col;
+  @apply w-3/4 flex-1 flex flex-col h-[calc(100vh-84px)];
 }

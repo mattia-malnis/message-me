@@ -1,5 +1,7 @@
 class ProfilesController < ApplicationController
-  before_action :authenticate_user!
+  include FindProfile
+
+  prepend_before_action :authenticate_user!
   before_action :set_or_build_profile, only: [:edit, :update]
   before_action :check_profile_existence, only: [:show]
 
@@ -21,13 +23,7 @@ class ProfilesController < ApplicationController
   private
 
   def set_or_build_profile
-    @profile = current_user.profile || current_user.build_profile
-  end
-
-  def check_profile_existence
-    return if current_user.profile.present?
-
-    redirect_to edit_profile_path, alert: "Please complete your profile before proceeding."
+    @profile ||= current_user.build_profile
   end
 
   def profile_params

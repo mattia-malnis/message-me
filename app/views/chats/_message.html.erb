@@ -1,0 +1,9 @@
+<% its_me = message.profile_id == @profile.id %>
+<%= content_tag :div, class: ["flex items-start mb-4", { "justify-end": its_me }] do %>
+  <%= user_icon(message.profile, "size-8") unless its_me %>
+  <div class="mx-3">
+    <%= message_content(message, its_me) %>
+    <p class="text-xs text-gray-400 mt-1"><%= to_datetime(message.created_at) %></p>
+  </div>
+  <%= user_icon(message.profile, "size-8") if its_me %>
+<% end %>

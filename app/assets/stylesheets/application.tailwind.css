@@ -2,12 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/*
-
-@layer components {
-  .btn-primary {
-    @apply py-2 px-4 bg-blue-200;
-  }
+#chat_details {
+  @apply w-3/4 flex flex-col;
 }
-
-*/

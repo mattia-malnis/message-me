@@ -9,21 +9,19 @@
 
     <div>
       <% @chats.each do |chat| %>
-        <% recipient = chat.profiles.reject { |p| p.id == @profile.id }.first %>
-        <!-- Single User (This should be a loop in your app) -->
-        <div class="cursor-pointer p-4 border-b hover:bg-blue-50 flex items-center">
-          <div class="flex-shrink-0 h-10 w-10 rounded-full bg-blue-500 text-white flex items-center justify-center">
-            <%= recipient.name.first %>
+        <% recipient = chat.recipient(@profile.id) %>
+        <%= link_to chat_path(chat.token), data: { turbo_frame: "chat_details" } do %>
+          <div class="cursor-pointer p-4 border-b hover:bg-blue-50 flex items-center">
+            <%= user_icon(recipient) %>
+            <div class="ml-3">
+              <p class="text-sm font-medium text-gray-900"><%= recipient.name %></p>
+              <p class="text-xs text-gray-500">@<%= recipient.nickname %></p>
+            </div>
           </div>
-          <div class="ml-3">
-            <p class="text-sm font-medium text-gray-900"><%= recipient.name %></p>
-            <p class="text-xs text-gray-500">@<%= recipient.nickname %></p>
-          </div>
-        </div>
+        <% end %>
       <% end %>
     </div>
   </div>
 <% end %>
 
-<div class="w-3/4 flex flex-col">
-</div>
+<%= turbo_frame_tag :chat_details %>

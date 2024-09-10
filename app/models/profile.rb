@@ -1,4 +1,7 @@
 class Profile < ApplicationRecord
+  has_many :chat_profiles, dependent: :destroy
+  has_many :chats, through: :chat_profiles
+  has_many :messages, dependent: :destroy
   belongs_to :user
 
   validates :name, presence: true

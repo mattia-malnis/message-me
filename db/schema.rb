@@ -10,9 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_09_09_125609) do
+ActiveRecord::Schema[7.2].define(version: 2024_09_10_072246) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "chat_profiles", force: :cascade do |t|
+    t.bigint "chat_id"
+    t.bigint "profile_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["chat_id", "profile_id"], name: "index_chat_profiles_on_chat_id_and_profile_id", unique: true
+    t.index ["chat_id"], name: "index_chat_profiles_on_chat_id"
+    t.index ["profile_id"], name: "index_chat_profiles_on_profile_id"
+  end
+
+  create_table "chats", force: :cascade do |t|
+    t.string "token", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["token"], name: "index_chats_on_token", unique: true
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.text "content", null: false
+    t.bigint "profile_id"
+    t.bigint "chat_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["chat_id"], name: "index_messages_on_chat_id"
+    t.index ["profile_id"], name: "index_messages_on_profile_id"
+  end
 
   create_table "profiles", force: :cascade do |t|
     t.string "name", null: false

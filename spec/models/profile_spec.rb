@@ -4,6 +4,9 @@ RSpec.describe Profile, type: :model do
   let(:profile) { FactoryBot.create(:profile) }
 
   context "associations" do
+    it { should have_many(:messages).dependent(:destroy) }
+    it { should have_many(:chat_profiles).dependent(:destroy) }
+    it { should have_many(:chats).through(:chat_profiles) }
     it { should belong_to(:user) }
   end
 

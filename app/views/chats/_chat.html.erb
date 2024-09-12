@@ -1,0 +1,17 @@
+<% recipient = recipient || chat.recipient(profile_id) %>
+<% new_msg = new_msg || false %>
+
+<%= link_to chat_path(chat.token), id: "chat_#{chat.token}", data: { turbo_frame: "chat_details" } do %>
+  <div class="cursor-pointer p-4 border-b hover:bg-blue-50 flex items-center">
+    <%= user_icon(recipient) %>
+    <div class="ml-3 grow">
+      <p class="text-sm font-medium text-gray-900"><%= recipient.name %></p>
+      <p class="text-xs text-gray-500">@<%= recipient.nickname %></p>
+    </div>
+    <% if new_msg %>
+      <div class="new-message-badge">
+        <div class="size-4 rounded-full bg-green-600"> </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>

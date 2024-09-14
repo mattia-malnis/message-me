@@ -16,8 +16,11 @@ class ChatsController < ApplicationController
   def update
     @message = @chat.messages.new(message_params)
     @message.profile = @profile
-    @message.save
-    broadcast_new_message
+
+    if @message.save
+      broadcast_new_message
+      notify_recipient
+    end
   end
 
   private
@@ -29,6 +32,20 @@ class ChatsController < ApplicationController
       partial: "chats/chat",
         locals: { chat: @chat, recipient: @profile, new_msg: true }
     )
+  end
+
+  def notify_recipient
+    return if @recipient.subscription.blank?
+
+    message = {
+      title: "You have a new message!",
+      options: {
+        body: "#{@profile.name} sent you a message",
+        data: { path: chats_path }
+      }
+    }
+
+    PushNotificationService.new(@recipient.subscription, message).notify
   end
 
   def set_chat

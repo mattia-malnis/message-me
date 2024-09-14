@@ -1,5 +1,5 @@
 <% content_for :sidebar do %>
-  <div class="w-1/4 bg-white overflow-y-auto shadow-inner">
+  <div class="w-1/4 bg-white overflow-y-auto shadow-inner" data-controller="notifications-subscribe" data-notifications-subscribe-api-key-value="<%= Base64.urlsafe_decode64(Rails.application.credentials.dig(:vapid, :public_key)).bytes %>">
     <div class="p-4 h-20 flex items-center border-t border-t-blue-50 border-b border-b-blue-100">
       <input
         type="text"

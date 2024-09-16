@@ -23,15 +23,27 @@ class ChatsController < ApplicationController
     end
   end
 
+  def search
+    if params[:query].blank?
+      @chats = @profile.chats.includes(:profiles)
+      render partial: "chats/sidebar", locals: { items: @chats }
+    else
+      @profiles = Profile.search_except_self(params[:query], @profile.id)
+    end
+  end
+
+  def new
+    @recipient = Profile.find_by!(token: params[:token])
+    @chat = Chat.find_chat_for_profiles(@profile, @recipient)
+    @chat ||= Chat.create(profiles: [@profile, @recipient])
+    @messages = @chat.messages.includes(:profile).ordered
+    render :show
+  end
+
   private
 
   def broadcast_new_message
-    Turbo::StreamsChannel.broadcast_append_to(
-      "sidebar_profile_#{@recipient.nickname}",
-      target: "sidebar-chats",
-      partial: "chats/chat",
-        locals: { chat: @chat, recipient: @profile, new_msg: true }
-    )
+    BroadcastService.new(@profile, @recipient, @chat).notify
   end
 
   def notify_recipient

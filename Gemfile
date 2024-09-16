@@ -43,6 +43,12 @@ gem "devise", "~> 4.9", ">= 4.9.4"
 # Web Push library for Ruby [https://github.com/pushpad/web-push]
 gem "web-push", "~> 3.0", ">= 3.0.1"
 
+# PostgreSQL’s full text search [https://github.com/Casecommons/pg_search]
+gem "pg_search", "~> 2.3", ">= 2.3.7"
+
+# Embed SVG documents in your Rails views and style them with CSS [https://github.com/jamesmartin/inline_svg]
+gem "inline_svg", "~> 1.10"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"

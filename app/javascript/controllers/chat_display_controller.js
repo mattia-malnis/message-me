@@ -16,7 +16,7 @@ export default class extends Controller {
   // function to hide the new message badge
   hideBadge() {
     if (this.hasTokenValue) {
-      const badge = document.querySelector(`#chat_${this.tokenValue} .new-message-badge`);
+      const badge = document.querySelector(`#recipient_${this.tokenValue} .new-message-badge`);
       if (badge) {
         badge.style.display = "none";
       }

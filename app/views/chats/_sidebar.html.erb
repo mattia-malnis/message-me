@@ -1,0 +1,15 @@
+<%= turbo_frame_tag :sidebar_chats do %>
+  <% items.each do |item| %>
+    <% if item.is_a?(Chat) %>
+      <%= render partial: "chat_item", locals: {
+        chat: item,
+        recipient: item.recipient(@profile.id),
+        profile: @profile
+      } %>
+    <% else %>
+      <%= render partial: "chat_item", locals: {
+        recipient: item
+      } %>
+    <% end %>
+  <% end %>
+<% end %>

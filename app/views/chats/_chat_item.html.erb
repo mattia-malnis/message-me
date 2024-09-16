@@ -1,7 +1,14 @@
-<% recipient = recipient || chat.recipient(profile_id) %>
-<% new_msg = new_msg || false %>
+<%
+  new_msg = local_assigns.fetch(:new_msg, false)
+  chat = local_assigns.fetch(:chat, nil)
+  if chat.present?
+    path = chat_path(chat.token)
+  else
+    path = new_chat_path(token: recipient.token)
+  end
+%>
 
-<%= link_to chat_path(chat.token), id: "chat_#{chat.token}", data: { turbo_frame: "chat_details" } do %>
+<%= link_to path, id: "recipient_#{recipient.token}", data: { turbo_frame: "chat_details", turbo_prefetch: false } do %>
   <div class="cursor-pointer p-4 border-b hover:bg-blue-50 flex items-center">
     <%= user_icon(recipient) %>
     <div class="ml-3 grow">

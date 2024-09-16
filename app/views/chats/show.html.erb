@@ -9,7 +9,7 @@
 
   <%= content_tag :div, class: "flex-1 p-4 overflow-y-auto", id: "messages",
                   data: { controller: "chat-display",
-                          chat_display_token_value: @chat.token,
+                          chat_display_token_value: @recipient.token,
                           chat_display_target: "messagesContainer" } do %>
     <%= render partial: "message", collection: @messages %>
   <% end %>

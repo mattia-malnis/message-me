@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_09_13_160012) do
+ActiveRecord::Schema[7.2].define(version: 2024_09_15_134626) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -48,7 +48,11 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_13_160012) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.virtual "textsearchable_col", type: :tsvector, as: "to_tsvector('english'::regconfig, (((((COALESCE(name, ''::character varying))::text || ' '::text) || (COALESCE(nickname, ''::character varying))::text) || ' '::text) || COALESCE(('@'::text || (nickname)::text), ''::text)))", stored: true
+    t.string "token"
     t.index "lower((nickname)::text)", name: "index_profiles_on_lower_nickname", unique: true
+    t.index ["textsearchable_col"], name: "index_profiles_on_textsearchable_col", using: :gin
+    t.index ["token"], name: "index_profiles_on_token", unique: true
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 

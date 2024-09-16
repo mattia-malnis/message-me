@@ -19,5 +19,9 @@ Rails.application.routes.draw do
   put "profile", to: "profiles#update"
   post "subscribe", to: "push_subscriptions#create"
 
-  resources :chats, only: [:index, :show, :update], param: :token
+  resources :chats, only: [:index, :show, :update, :new], param: :token do
+    collection do
+      get "search", to: "chats#search"
+    end
+  end
 end

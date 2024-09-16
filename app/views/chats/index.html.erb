@@ -1,18 +1,9 @@
 <% content_for :sidebar do %>
   <div class="w-1/4 bg-white overflow-y-auto shadow-inner" data-controller="notifications-subscribe" data-notifications-subscribe-api-key-value="<%= Base64.urlsafe_decode64(Rails.application.credentials.dig(:vapid, :public_key)).bytes %>">
-    <div class="p-4 h-20 flex items-center border-t border-t-blue-50 border-b border-b-blue-100">
-      <input
-        type="text"
-        placeholder="Search users..."
-        class="w-full px-4 py-2 border-none bg-gray-100 placeholder:text-gray-400 rounded-full focus:outline-none focus:border-blue-200">
-    </div>
+    <%= render partial: "search_bar" %>
 
     <%= turbo_stream_from "sidebar_profile_#{@profile.nickname}" %>
-    <div id="sidebar-chats">
-      <% @chats.each do |chat| %>
-        <%= render partial: "chat", collection: @chats, locals: { profile_id: @profile.id } %>
-      <% end %>
-    </div>
+    <%= render partial: "sidebar", locals: { items: @chats } %>
   </div>
 <% end %>
 

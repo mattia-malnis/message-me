@@ -30,3 +30,17 @@ This is a 1-to-1 chat application that uses ActionCable features:
 ## Testing
 
 Test the application with RSpec by running the command `bundle exec rspec`.
+
+## Screenshots
+
+<img width="1470" alt="MessageMe" src="https://github.com/user-attachments/assets/86f19c68-a866-4ff4-ba5c-1b5265cbb7f5">
+
+---
+
+<img width="1469" alt="immagine" src="https://github.com/user-attachments/assets/33f63552-5691-4c0a-9356-9c1857a56f57">
+
+---
+
+https://github.com/user-attachments/assets/79e30945-fb2c-4c69-ac50-b47e5a721172
+
+

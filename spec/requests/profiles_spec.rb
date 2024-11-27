@@ -7,7 +7,7 @@ RSpec.describe "Profiles", type: :request do
   describe "GET /profile" do
     context "when user has a profile" do
       it "returns http success" do
-        sign_in profile.user
+        sign_in profile.user, scope: :user
         get profile_path
         expect(response).to have_http_status(:success)
         expect(response).to render_template(:show)
@@ -16,7 +16,7 @@ RSpec.describe "Profiles", type: :request do
 
     context "when user has no profile" do
       it "redirects to the edit profile path" do
-        sign_in user
+        sign_in user, scope: :user
         get profile_path
         expect(response).to redirect_to(edit_profile_path)
       end
@@ -25,7 +25,7 @@ RSpec.describe "Profiles", type: :request do
 
   describe "GET /profile/edit" do
     it "returns http success" do
-      sign_in profile.user
+      sign_in profile.user, scope: :user
       get edit_profile_path
       expect(response).to have_http_status(:success)
       expect(response).to render_template(:edit)
@@ -35,7 +35,7 @@ RSpec.describe "Profiles", type: :request do
   describe "PUT /profile" do
     context "when user has no profile" do
       it "creates a new profile" do
-        sign_in user
+        sign_in user, scope: :user
         put profile_path, params: { profile: { name: "Name", nickname: "Nickname", bio: "Bio" } }
         expect(response).to redirect_to(profile_path)
         expect(user.reload.profile.name).to eq("Name")
@@ -44,14 +44,14 @@ RSpec.describe "Profiles", type: :request do
 
     context "when user has a profile" do
       it "updates the profile successfully" do
-        sign_in profile.user
+        sign_in profile.user, scope: :user
         put profile_path, params: { profile: { name: "Updated Name", nickname: "UpdatedNickname", bio: "Updated Bio" } }
         expect(response).to redirect_to(profile_path)
         expect(profile.reload.name).to eq("Updated Name")
       end
 
       it "renders edit page with errors on validation failure" do
-        sign_in profile.user
+        sign_in profile.user, scope: :user
         put profile_path, params: { profile: { name: "", nickname: "" } }
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response).to render_template(:edit)
